@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickList - Lista de Tarefas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>QuickList</h1>
+        <div class="task-input">
+            <input type="text" id="task-title" placeholder="Título da tarefa" required>
+            <input type="datetime-local" id="task-deadline">
+            <textarea id="task-description" placeholder="Descrição (opcional)"></textarea>
+            <select id="task-priority">
+                <option value="low">Baixa</option>
+                <option value="medium">Média</option>
+                <option value="high">Alta</option>
+            </select>
+            <button onclick="addTask()">Adicionar Tarefa</button>
+        </div>
+
+        <div class="task-section">
+            <h2>Tarefas Pendentes</h2>
+            <ul id="pending-tasks"></ul>
+        </div>
+
+        <div class="task-section">
+            <h2>Tarefas Concluídas</h2>
+            <ul id="completed-tasks"></ul>
+        </div>
+    </div>
+
+    <script>
+        function addTask() {
+            const title = document.getElementById('task-title').value;
+            const deadline = document.getElementById('task-deadline').value;
+            const description = document.getElementById('task-description').value;
+            const priority = document.getElementById('task-priority').value;
+
+            if (!title) {
+                alert('Por favor, insira o título da tarefa.');
+                return;
+            }
+
+            const task = {
+                id: Date.now(),
+                title,
+                deadline,
+                description,
+                priority,
+                completed: false
+            };
+
+            saveTask(task);
+            renderTasks();
+            clearInputs();
+            scheduleNotification(task);
+        }
+
+        function saveTask(task) {
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks.push(task);
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        function renderTasks() {
+            const pendingTasks = document.getElementById('pending-tasks');
+            const completedTasks = document.getElementById('completed-tasks');
+            pendingTasks.innerHTML = '';
+            completedTasks.innerHTML = '';
+
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+            tasks.forEach(task => {
+                const li = document.createElement('li');
+                li.className = `task ${task.priority}`;
+                li.innerHTML = `
+                    <div>
+                        <h3>${task.title}</h3>
+                        ${task.deadline ? `<p>Vencimento: ${new Date(task.deadline).toLocaleString()}</p>` : ''}
+                        ${task.description ? `<p>${task.description}</p>` : ''}
+                        <p>Prioridade: ${task.priority === 'high' ? 'Alta' : task.priority === 'medium' ? 'Média' : 'Baixa'}</p>
+                    </div>
+                    <div>
+                        <button onclick="toggleComplete(${task.id})">${task.completed ? 'Desmarcar' : 'Concluir'}</button>
+                        <button onclick="editTask(${task.id})">Editar</button>
+                        <button onclick="deleteTask(${task.id})">Excluir</button>
+                    </div>
+                `;
+
+                if (task.completed) {
+                    completedTasks.appendChild(li);
+                } else {
+                    pendingTasks.appendChild(li);
+                }
+            });
+        }
+
+        function clearInputs() {
+            document.getElementById('task-title').value = '';
+            document.getElementById('task-deadline').value = '';
+            document.getElementById('task-description').value = '';
+            document.getElementById('task-priority').value = 'low';
+        }
+
+        function toggleComplete(id) {
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks = tasks.map(task => {
+                if (task.id === id) {
+                    task.completed = !task.completed;
+                }
+                return task;
+            });
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            renderTasks();
+        }
+
+        function editTask(id) {
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            const task = tasks.find(task => task.id === id);
+            if (task) {
+                document.getElementById('task-title').value = task.title;
+                document.getElementById('task-deadline').value = task.deadline ? task.deadline.slice(0, 16) : '';
+                document.getElementById('task-description').value = task.description;
+                document.getElementById('task-priority').value = task.priority;
+                deleteTask(id);
+            }
+        }
+
+        function deleteTask(id) {
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks = tasks.filter(task => task.id !== id);
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            renderTasks();
+        }
+
+        function scheduleNotification(task) {
+            if (task.deadline && 'Notification' in window) {
+                Notification.requestPermission().then(permission => {
+                    if (permission === 'granted') {
+                        const deadlineTime = new Date(task.deadline).getTime();
+                        const now = new Date().getTime();
+                        const timeUntilDeadline = deadlineTime - now;
+
+                        if (timeUntilDeadline > 0) {
+                            setTimeout(() => {
+                                new Notification(`Tarefa: ${task.title}`, {
+                                    body: `Vencimento: ${new Date(task.deadline).toLocaleString()}`,
+                                });
+                            }, timeUntilDeadline);
+                        }
+                    }
+                });
+            }
+        }
+
+        window.onload = renderTasks;
+    </script>
+</body>
+</html>
