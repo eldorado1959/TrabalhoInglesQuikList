@@ -1,0 +1,108 @@
+
+
+📱 App Name: QuickList
+🎯 Function:
+QuickList é um aplicativo simples e direto para criar listas de tarefas diárias. 
+Ele foi projetado para pessoas que precisam de uma maneira rápida e eficiente 
+de organizar suas atividades sem complicação.
+
+⭐ Main Features:
+Task Creation
+O usuário pode criar tarefas com títulos, prazos e uma breve descrição. 
+A interface permite adicionar, editar e excluir tarefas de forma intuitiva.
+
+Priority Levels
+Cada tarefa pode ser marcada com um nível de prioridade: Alta, Média ou Baixa. 
+Isso ajuda o usuário a se concentrar no que é mais urgente.
+
+Reminders & Notifications
+O aplicativo envia notificações no horário programado para lembrá-lo das tarefas pendentes.
+
+Task Completion
+Ao concluir uma tarefa, o usuário pode marcá-la como concluída e ela será movida para uma seção separada, 
+com uma lista de todas as tarefas finalizadas.
+
+🖼️ Interface Design (example layout):
+(Students should draw or use Canva/Figma for this)
+
+Home Screen:
+
+A list of tasks displayed with their title, priority level, and due date.
+
+A button at the top to Add Task.
+
+Below each task, a checkbox for marking as completed.
+
+Bottom Menu:
+
+Home 🏠 | My Tasks 📋 | Completed ✅ | Settings ⚙️
+
+💬 Presentation Sample (for students):
+Hi everyone! Our app is called QuickList.
+It helps you quickly create and manage your daily tasks.
+The main features are:
+
+Task Creation: Easily add tasks with a title, description, and due date.
+
+Priority Levels: Assign priority to your tasks to focus on what’s most important.
+
+Reminders & Notifications: Get notified when a task is due.
+
+Task Completion: Mark tasks as completed, and they’ll move to the "Completed" section.
+Here is the design of the app (show interface).
+We hope you find it helpful! Thank you.
+
+🔧 Usability Focus
+O QuickList foi projetado para ser prático e sem fricções, ideal para quem precisa 
+de um sistema simples de organização pessoal, sem complexidade.
+
+
+
+
+------------------------------------------------------------------------------------------------------------
+
+
+📱 **App Name:** QuickList  
+🎯 **Function:**  
+
+QuickList is a simple and straightforward app for creating daily to-do lists.  
+It is designed for people who need a quick and efficient way to organize their tasks without complications.
+
+⭐ **Main Features:**  
+**Task Creation**  
+Users can create tasks with titles, deadlines, and a brief description. 
+The interface allows adding, editing, and deleting tasks intuitively.
+
+**Priority Levels**  
+Each task can be assigned a priority level: High, Medium, or Low. 
+This helps users focus on the most urgent tasks.
+
+**Reminders & Notifications**  
+The app sends notifications at the scheduled time to remind users of pending tasks.
+
+**Task Completion**  
+Upon completing a task, users can mark it as done.
+
+**Home Screen:**  
+- A list of tasks displayed with their title, priority level, and due date.  
+- A button at the top to Add Task.  
+
+**Bottom Menu:**  
+- Home 🏠 | My Tasks 📋 | Completed ✅ | Settings ⚙️  
+
+
+Hi everyone! Our app is called QuickList.  
+It helps you quickly create and manage your daily tasks.  
+The main features are:  
+
+- **Task Creation**: Easily add tasks with a title, description, and due date.  
+- **Priority Levels**: Assign priority to your tasks to focus on what’s most important.  
+- **Reminders & Notifications**: Get notified when a task is due.  
+- **Task Completion**: Mark tasks as completed, and they’ll move to the "Completed" section.  
+
+
+🔧 **Usability Focus**  
+QuickList is designed to be practical and frictionless, ideal for those who need 
+a simple personal organization system without complexity.
+
+
